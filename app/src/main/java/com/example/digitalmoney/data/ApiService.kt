@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("digital-money")
-    suspend fun getItems() : Response<Data>
+    suspend fun items() : Response<Data>
 
 }
