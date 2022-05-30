@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.digitalmoney.databinding.ItemBinding
-import com.example.digitalmoney.model.Item
+import com.example.digitalmoney.model.Data
 
-class ItemsAdapter : ListAdapter<Item, ItemsAdapter.ViewHolder>(DiffUtilCallback()) {
+class ItemsAdapter : ListAdapter<Data, ItemsAdapter.ViewHolder>(DiffUtilCallback()) {
 
-    var onItemClick: ((Item) -> Unit)? = null
+    var onItemClick: ((Data) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -29,7 +29,7 @@ class ItemsAdapter : ListAdapter<Item, ItemsAdapter.ViewHolder>(DiffUtilCallback
     class ViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item, onItemClick: ((Item) -> Unit)?) {
+        fun bind(item: Data, onItemClick: ((Data) -> Unit)?) {
             with(binding){
                 txtItemName.text = item.name
 //                itemImage.setImageResource()
@@ -41,13 +41,13 @@ class ItemsAdapter : ListAdapter<Item, ItemsAdapter.ViewHolder>(DiffUtilCallback
         }
     }
 
-    class DiffUtilCallback : DiffUtil.ItemCallback<Item>() {
+    class DiffUtilCallback : DiffUtil.ItemCallback<Data>() {
 
-        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
+        override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
             return newItem.id == oldItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+        override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
             return oldItem == newItem
         }
 
