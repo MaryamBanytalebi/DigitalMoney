@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.digitalmoney.databinding.ItemBinding
-import com.example.digitalmoney.model.Data
+import com.example.digitalmoney.data.model.Data
 
 class ItemsAdapter : ListAdapter<Data, ItemsAdapter.ViewHolder>(DiffUtilCallback()) {
 
@@ -32,6 +32,7 @@ class ItemsAdapter : ListAdapter<Data, ItemsAdapter.ViewHolder>(DiffUtilCallback
         fun bind(item: Data, onItemClick: ((Data) -> Unit)?) {
             with(binding){
                 txtItemName.text = item.name
+                txtItemUsd.text = item.priceUsd
 //                itemImage.setImageResource()
 
                 root.setOnClickListener {

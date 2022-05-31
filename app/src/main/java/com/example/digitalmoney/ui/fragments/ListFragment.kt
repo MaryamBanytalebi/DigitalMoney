@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,14 +22,14 @@ class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
     private lateinit var itemsAdapter: ItemsAdapter
-    private lateinit var viewModel : ItemViewModel
+    private lateinit var viewModel: ItemViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentListBinding.inflate(inflater,container,false)
+        binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -36,15 +38,16 @@ class ListFragment : Fragment() {
         setUpViewModel()
         setUpAdapter()
         setUpRecycle()
-
+        setUpObserver()
+        setUpSpinner()
     }
 
-    private fun setUpViewModel(){
+    private fun setUpViewModel() {
         viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
         viewModel.fetchItems()
     }
 
-    private fun setUpRecycle(){
+    private fun setUpRecycle() {
 
         binding.recyclerItems.apply {
             layoutManager = LinearLayoutManager(context)
@@ -53,10 +56,48 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun setUpAdapter(){
+    private fun setUpAdapter() {
         itemsAdapter = ItemsAdapter().also {
-            it.onItemClick = {//TODO
-                findNavController().navigate(R.id.detailFragment)
+            it.onItemClick = {
+                val bundle = Bundle().apply {
+                    putParcelable("data", it)
+                }
+                findNavController().navigate(R.id.detailFragment, bundle)
+            }
+        }
+    }
+
+    private fun setUpObserver() {
+        viewModel.itemList.observe(viewLifecycleOwner) {
+            itemsAdapter.submitList(it)
+        }
+    }
+
+    private fun setUpSpinner() {
+        val itemsSort = resources.getStringArray(R.array.ItemsSort)
+        val spinnerAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            itemsSort
+        )
+
+        binding.spinner.apply {
+            adapter = spinnerAdapter
+            onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+
+                    viewModel.sort(adapter.getItem(position).toString())
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
             }
         }
     }
