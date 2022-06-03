@@ -45,6 +45,7 @@ dependencies {
     def lifecycle_version = "2.5.0-alpha06"
     def nav_version = "2.4.2"
     def retrofit_version = "2.9.0"
+    def picasso_version = "2.71828"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -73,4 +74,7 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
 }

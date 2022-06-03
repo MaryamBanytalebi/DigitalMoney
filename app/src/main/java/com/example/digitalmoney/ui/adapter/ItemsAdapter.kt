@@ -7,10 +7,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.digitalmoney.databinding.ItemBinding
 import com.example.digitalmoney.data.model.Data
+import com.example.digitalmoney.data.repository.Repository
+import com.squareup.picasso.Picasso
 
 class ItemsAdapter : ListAdapter<Data, ItemsAdapter.ViewHolder>(DiffUtilCallback()) {
 
     var onItemClick: ((Data) -> Unit)? = null
+    val images = mapOf(
+        "Bitcoin" to "https://www.freepik.com/free-vector/golden-coin-with-word-bitcoin_2094980.htm#query=coin&position=22&from_view=search",
+        "Ethereum" to "https://www.freepik.com/free-vector/golden-coin-with-word-bitcoin_2094980.htm#query=coin&position=22&from_view=search",
+        "Cardano" to "https://www.freepik.com/free-vector/golden-coin-with-word-bitcoin_2094980.htm#query=coin&position=22&from_view=search"
+    )
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -26,15 +34,25 @@ class ItemsAdapter : ListAdapter<Data, ItemsAdapter.ViewHolder>(DiffUtilCallback
         holder.bind(getItem(position), onItemClick)
     }
 
-    class ViewHolder(private val binding: ItemBinding) :
+    inner class ViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Data, onItemClick: ((Data) -> Unit)?) {
-            with(binding){
+
+            with(binding) {
                 txtItemName.text = item.name
                 txtItemUsd.text = item.priceUsd
-//                itemImage.setImageResource()
-
+                when (item.name) {
+                    "Bitcoin" -> {
+                        Picasso.get().load(images[item.name]).into(itemImage)
+                    }
+                    "Ethereum" -> {
+                        Picasso.get().load(images[item.name]).into(itemImage)
+                    }
+                    "Cardano" -> {
+                        Picasso.get().load(images[item.name]).into(itemImage)
+                    }
+                }
                 root.setOnClickListener {
                     onItemClick?.invoke(item)
                 }

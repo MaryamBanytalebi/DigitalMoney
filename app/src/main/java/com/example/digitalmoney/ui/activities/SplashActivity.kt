@@ -59,6 +59,8 @@ class SplashActivity : AppCompatActivity() {
                 connectManager.getNetworkCapabilities(network)?.let { capabilities ->
                     when {
                         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
                         else -> false
                     }
                 } ?: false

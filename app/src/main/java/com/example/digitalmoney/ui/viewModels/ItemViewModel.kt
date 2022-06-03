@@ -43,7 +43,8 @@ class ItemViewModel @Inject constructor(private val repository: Repository) : Vi
 
     fun sort(text:String){
         when(text){
-            "Price in USD" -> {_itemList.postValue(_itemList.value?.sortedWith(compareBy { data-> data.priceUsd}))}
+            "Price in USD" ->
+            {_itemList.postValue(_itemList.value?.sortedWith(compareBy { data-> data.priceUsd}))}
             "Rank" -> {_itemList.postValue(_itemList.value?.sortedBy { data-> data.rank})}
             "Name" -> {_itemList.postValue(_itemList.value?.sortedBy { data-> data.name})}
         }
