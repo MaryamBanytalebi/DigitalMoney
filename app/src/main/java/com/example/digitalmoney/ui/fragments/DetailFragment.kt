@@ -59,6 +59,4 @@ class DetailFragment : Fragment() {
             }
         }
     }
-
-
 }

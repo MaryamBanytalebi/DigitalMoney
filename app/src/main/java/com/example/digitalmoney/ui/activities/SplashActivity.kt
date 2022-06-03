@@ -9,9 +9,9 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.view.WindowManager
-import com.example.digitalmoney.R
-import com.example.digitalmoney.databinding.ActivityMainBinding
+import android.widget.Toast
 import com.example.digitalmoney.databinding.ActivitySplashBinding
 import com.example.digitalmoney.ui.MainActivity
 
@@ -29,14 +29,26 @@ class SplashActivity : AppCompatActivity() {
         )
 
         if (hasNetWork()) {
-            Handler(mainLooper).postDelayed({
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }, 5000)
+            doWork()
+            binding.btnRetry.visibility = View.INVISIBLE
         } else {
-
+            Toast.makeText(this, "no connection", Toast.LENGTH_SHORT).show()
         }
+        binding.btnRetry.setOnClickListener {
+            if (hasNetWork())
+                doWork()
+            else
+                Toast.makeText(this, "no connection", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun doWork() {
+        Handler(mainLooper).postDelayed({
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 5000)
     }
 
     fun hasNetWork(): Boolean {

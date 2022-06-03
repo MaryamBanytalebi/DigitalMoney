@@ -31,11 +31,11 @@ class ItemViewModel @Inject constructor(private val repository: Repository) : Vi
                         }
 
                     } else {
-                        Log.e("TAG", "fetchItems1: ${message()}")
+                        Log.d("TAG", "fetchItems1: ${message()}")
                     }
                 }
             }catch (e: Exception) {
-                Log.e("TAG", "fetchItems2: ${e.message}")
+                Log.d("TAG", "fetchItems2: ${e.message}")
             }
         }
 
