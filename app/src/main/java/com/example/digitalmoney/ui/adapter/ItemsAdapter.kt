@@ -15,9 +15,9 @@ class ItemsAdapter : ListAdapter<Data, ItemsAdapter.ViewHolder>(DiffUtilCallback
 
     var onItemClick: ((Data) -> Unit)? = null
     val images = mapOf(
-        "Bitcoin" to "https://www.freepik.com/free-vector/golden-coin-with-word-bitcoin_2094980.htm#query=coin&position=22&from_view=search",
-        "Ethereum" to "https://www.freepik.com/free-vector/golden-coin-with-word-bitcoin_2094980.htm#query=coin&position=22&from_view=search",
-        "Cardano" to "https://www.freepik.com/free-vector/golden-coin-with-word-bitcoin_2094980.htm#query=coin&position=22&from_view=search"
+        "Bitcoin" to "https://upload.wikimedia.org/wikipedia/commons/5/50/Bitcoin.png",
+        "Ethereum" to "https://upload.wikimedia.org/wikipedia/commons/5/50/Bitcoin.png",
+        "Cardano" to "https://upload.wikimedia.org/wikipedia/commons/5/50/Bitcoin.png"
     )
 
 
@@ -43,18 +43,8 @@ class ItemsAdapter : ListAdapter<Data, ItemsAdapter.ViewHolder>(DiffUtilCallback
             with(binding) {
                 txtItemName.text = item.name
                 txtItemUsd.text = item.priceUsd
-                when (item.name) {
-                    "Bitcoin" -> {
-                        Picasso.get().load(images[item.name]).into(itemImage)
-                    }
-                    "Ethereum" -> {
-                        Picasso.get().load(images[item.name]).into(itemImage)
-                    }
-                    "Cardano" -> {
-                        Picasso.get().load(images[item.name]).into(itemImage)
-                        Log.d("TAG", "bind: "+ Picasso.get().load(images[item.name]).into(itemImage))
-                    }
-                }
+                Picasso.get().load(images[item.name]).into(itemImage)
+
                 root.setOnClickListener {
                     onItemClick?.invoke(item)
                 }
