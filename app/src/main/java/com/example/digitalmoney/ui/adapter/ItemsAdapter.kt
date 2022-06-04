@@ -1,5 +1,6 @@
 package com.example.digitalmoney.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -51,6 +52,7 @@ class ItemsAdapter : ListAdapter<Data, ItemsAdapter.ViewHolder>(DiffUtilCallback
                     }
                     "Cardano" -> {
                         Picasso.get().load(images[item.name]).into(itemImage)
+                        Log.d("TAG", "bind: "+ Picasso.get().load(images[item.name]).into(itemImage))
                     }
                 }
                 root.setOnClickListener {
