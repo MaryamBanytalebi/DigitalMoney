@@ -5,4 +5,4 @@ library uses in this project is Retrofit, NavigationComponent, DaggerHilt, Picas
 in kotlin language and MVVM architecture.
 
 
-![alt text](assets/test.png)
+![alt text](assets/test.jpg)
