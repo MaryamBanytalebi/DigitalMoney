@@ -6,3 +6,4 @@ in kotlin language and MVVM architecture.
 
 
 ![alt text](assets/test.jpg)
+![alt text](assets/Main_DigitalMoney.jpg)
